@@ -13,6 +13,10 @@ server.use(express.json())
 server.use(helmet());
 server.use(cors());
 
-server.use('/assigners', AssignersRouter)
+server.use('/api/assigners', AssignersRouter)
 
+
+server.use('/duty', (req, res) => {
+    res.send("Welcomto the Duty Server")
+})
 module.exports = server;

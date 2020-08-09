@@ -38,9 +38,9 @@ Here is a table with the `endpoint` descriptions:
 
 | Action               | URL               | Method | Response         |
 | :------------------- | :---------------- | :----- | :--------------- |
-| Add a Assigner         | /api/assigners      | POST   | the new Assigner   |
+| Add a Assigner         | /api/assigners      | POST   | new Assigner   |
 | View list of Assigners | /api/assigners      | GET    | array of Assigners |
-| View Assigner details  | /api/assigners/{id} | GET    | a Assigner         |
+| View Assigner details  | /api/assigners/{id} | GET    | Assigner By Id        |
 | Update Assigner        | /api/assigners/{id} | PATCH  | updated Assigner   |
 | Remove a Assigner      | /api/assigners/{id} | DELETE | deleted Assigner   |
 | Add a Assignee            | /api/assignees         | POST   | the new Assignee      |
