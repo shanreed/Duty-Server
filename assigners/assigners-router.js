@@ -1,4 +1,5 @@
 const express = require("express");
+const shortid = require('shortid')
 
 const data = require("../data");
 const Assigners = require("./assigners-model");
@@ -34,5 +35,12 @@ router.get("/:id", (req, res) => {
        const name = newArray.map(assigner =>  assigner.username)
        res.send(name)
 });
+
+router.post("/", (req, res) => {
+  const assignerInfo = req.body; 
+    assignerInfo.id = shortid.generate(); 
+    data.assigners.push(assignerInfo) 
+    res.status(201).json(assignerInfo)
+})
 
 module.exports = router;
