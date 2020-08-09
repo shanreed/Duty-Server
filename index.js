@@ -27,16 +27,6 @@ server.get('/api/assigners/:id', (req, res) => {
     }
 })
 
-// //CREATE
-// server.post('/api/assigners', (req, res) => {
-//     const assignerInfo = req.body; 
-//     assignerInfo.id = shortid.generate(); 
-//     assigners.data.push(assignerInfo) 
-//     res.status(201).json(assignerInfo)
-// })
-
-
-// //UPDATE
 
 
 // //DELETE
@@ -53,25 +43,8 @@ server.get('/api/assigners/:id', (req, res) => {
 // })
 
 
-// //UPDATE- Change
-// server.patch('/api/assigners/:id', (req, res) => {
-//     const {id} = req.params;
-//     const changes = req.body;
 
-//     let found = assigners.data.find(assigner => assigner.id === id);
-
-//     if (found) {
-//         Object.assign(found, changes);
-//         res.status(200).json(found);
-
-//     } else {
-//         res.status(404).json({message: "assigner not found"})
-//     }
-// })
-
-
-
-// // //UPDATE Rplace
+// // //UPDATE Replace
 // // server.put('/api/assigners/:id', (req, res) => {
 // //     const {id} = req.params;
 // //     const changes = req.body;
