@@ -1,9 +1,9 @@
 require('dotenv').config()
 const server = require('./api/server.js');
 const shortid = require('shortid')
+const assigners = require('./data');
 
-
-let assigners = []
+// let assigners = []
 
 //CRUD
 
@@ -12,7 +12,8 @@ let assigners = []
 
 //READ
 server.get('/api/assigners', (req, res) => {
-    res.json(assigners)
+    // console.log(assigners.data)
+    res.json({assigners})
 })
 
 server.get('/api/assigners/:id', (req, res) => {
@@ -26,65 +27,65 @@ server.get('/api/assigners/:id', (req, res) => {
     }
 })
 
-//CREATE
-server.post('/api/assigners', (req, res) => {
-    const assignerInfo = req.body; 
-    assignerInfo.id = shortid.generate(); 
-    assigners.push(assignerInfo) 
-    res.status(201).json(assignerInfo)
-})
+// //CREATE
+// server.post('/api/assigners', (req, res) => {
+//     const assignerInfo = req.body; 
+//     assignerInfo.id = shortid.generate(); 
+//     assigners.data.push(assignerInfo) 
+//     res.status(201).json(assignerInfo)
+// })
 
 
-//UPDATE
+// //UPDATE
 
 
-//DELETE
-server.delete('/api/assigners/:id', (req, res) => {
-    const { id } = req.params; 
+// //DELETE
+// server.delete('/api/assigners/:id', (req, res) => {
+//     const { id } = req.params; 
 
-    const deleted = assigners.find(assigner => assigner.id === id);
-    if (deleted) {
-        assigners= assigners.filter(assigner => assigner.id !== id);
-        res.status(200).json({Deleted:deleted })
-    } else {
-        res.status(404).json({meassage: "assigner not found"});
-    }
-})
-
-
-//UPDATE- Change
-server.patch('/api/assigners/:id', (req, res) => {
-    const {id} = req.params;
-    const changes = req.body;
-
-    let found = assigners.find(assigner => assigner.id === id);
-
-    if (found) {
-        Object.assign(found, changes);
-        res.status(200).json(found);
-
-    } else {
-        res.status(404).json({message: "assigner not found"})
-    }
-})
+//     const deleted = assigners.find(assigner => assigner.id === id);
+//     if (deleted) {
+//         assigners= assigners.filter(assigner => assigner.id !== id);
+//         res.status(200).json({Message:"Assigner Deleted" })
+//     } else {
+//         res.status(404).json({meassage: "assigner not found"});
+//     }
+// })
 
 
+// //UPDATE- Change
+// server.patch('/api/assigners/:id', (req, res) => {
+//     const {id} = req.params;
+//     const changes = req.body;
 
-//UPDATE Rplace
-server.put('/api/assigners/:id', (req, res) => {
-    const {id} = req.params;
-    const changes = req.body;
+//     let found = assigners.data.find(assigner => assigner.id === id);
 
-    let index = assigners.findIndex(assigner => assigner.id === id); 
+//     if (found) {
+//         Object.assign(found, changes);
+//         res.status(200).json(found);
+
+//     } else {
+//         res.status(404).json({message: "assigner not found"})
+//     }
+// })
+
+
+
+// // //UPDATE Rplace
+// // server.put('/api/assigners/:id', (req, res) => {
+// //     const {id} = req.params;
+// //     const changes = req.body;
+
+// //     let index = assigners.data.findIndex(assigner => assigner.id === id); 
     
-    if (index !== -1) {
-        assigners[index] = changes
-        res.status(200).json(assigners[index]);
+// //     if (index !== -1) {
+// //         assigners.data[index] = changes
+// //         res.status(200).json(assigners[index]);
 
-    } else {
-        res.status(404).json({message: "assigner not found"})
-    }
-})
+// //     } else {
+// //         res.status(404).json({message: "assigner not found"})
+// //     }
+// // })
 
 
 
