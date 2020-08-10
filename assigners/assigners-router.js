@@ -16,23 +16,63 @@ router.get("/", (req, res) => {
 
 //GET ASSIGNER BY ID
 router.get("/:id", (req, res) => {
-  const id = req.params.id
+      const id = req.params.id
       let assignersArray = data.assigners
       const newArray = assignersArray.filter(assigner => assigner.id === id )
-      console.log(newArray);
-      const name = newArray.map(assigner =>  assigner.username)
-      res.send(name)
-});
+     
+      if (newArray.length > 0) {
+          const name = newArray.map(assigner =>  assigner.username)
+          res.send(name)
+      } else {
+          res.status(403).json({ error: "That user does not Exist" });
+  }
+      });
 
 
 //CREAT A NEW ASSIGNER
 router.post("/", (req, res) => {
-  const assignerInfo = req.body; 
-    assignerInfo.id = shortid.generate(); 
-    data.assigners.push(assignerInfo) 
-    res.status(201).json(assignerInfo)
+    const {username, email, phoneNumber, password} = req.body 
+    console.log(req.body);
+    if(username && email && phoneNumber && password) {
+      const assignerInfo = req.body
+      assignerInfo.id = shortid.generate(); 
+      data.assigners.push(assignerInfo) 
+      res.status(201).json(assignerInfo)
+    } else {
+      res.status(403).json({ error: "Username, email, phone number and password required" });
+
+    }
+    
 })
 
+router.post("/login", (req, res) => {
+  
+      const assignersArray = data.assigners
+
+        const newArray = assignersArray.filter(assigner => assigner)
+        console.log(newArray);
+        const task = newArray.map(assigner =>  assigner.tasks)
+        console.log(task);
+        res.status(200).json(data.assigners)
+  // const { username, password } = req.body;
+ 
+  // const assignerInfo = data.assigners.filter(assigner => assigner.username == username && assigner.password == password )
+  // const userTasks = assignerInfo[0]
+  // const tasks = userTasks.tasks.map(task =>  task.taskName)
+  //  console.log(tasks)
+  //  res.status(200).json(tasks)
+  // console.log(data.assigners)
+  // // function checkInfo(username) {
+  // //   return username === data.assigners.username
+  // // }
+  // if (username === "shannon" && password === "reed") {
+    
+  // } else {
+  //   res
+  //     .status(403)
+  //     .json({ error: "Username or Password incorrect. Please see Readme" });
+  // }
+});
 
 //UPDATE ASSIGNER
 router.patch("/:id", (req, res) => {
