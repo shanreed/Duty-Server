@@ -46,32 +46,17 @@ router.post("/", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-  
-      const assignersArray = data.assigners
-
-        const newArray = assignersArray.filter(assigner => assigner)
-        console.log(newArray);
-        const task = newArray.map(assigner =>  assigner.tasks)
+  const { username, password } = req.body;
+  let assignersArray = data.assigners
+  const assignerInfo = assignersArray.filter(assigner => assigner.username == username && assigner.password == password )
+    if (assignerInfo.length > 0) {
+      const task = assignerInfo.map(assigner =>  assigner.tasks)
         console.log(task);
-        res.status(200).json(data.assigners)
-  // const { username, password } = req.body;
- 
-  // const assignerInfo = data.assigners.filter(assigner => assigner.username == username && assigner.password == password )
-  // const userTasks = assignerInfo[0]
-  // const tasks = userTasks.tasks.map(task =>  task.taskName)
-  //  console.log(tasks)
-  //  res.status(200).json(tasks)
-  // console.log(data.assigners)
-  // // function checkInfo(username) {
-  // //   return username === data.assigners.username
-  // // }
-  // if (username === "shannon" && password === "reed") {
-    
-  // } else {
-  //   res
-  //     .status(403)
-  //     .json({ error: "Username or Password incorrect. Please see Readme" });
-  // }
+        res.status(200).json(task)
+    } else {
+      res.status(403).json({ error: "Username or Password incorrect." });
+
+    }
 });
 
 //UPDATE ASSIGNER
