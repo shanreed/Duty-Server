@@ -2,15 +2,15 @@ const express = require("express");
 const shortid = require('shortid')
 
 const data = require("../data");
-const Assigners = require("./assigners-model");
 
 const router = express.Router();
 
 
 //GET ASSIGNERS
 router.get("/", (req, res) => {
-    Assigners.find(data.assigners)
-    res.send(data.assigners)
+    let assignersArray = data.assigners
+    const newArray = assignersArray.map(assigner => assigner.username)
+    res.send(newArray)
 });
 
 
