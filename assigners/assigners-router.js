@@ -9,7 +9,7 @@ const router = express.Router();
 //GET ASSIGNERS
 router.get("/", (req, res) => {
     let assignersArray = data.assigners
-    const newArray = assignersArray.map(assigner => assigner.username)
+    const newArray = assignersArray.map(assigner => assigner)
     res.send(newArray)
 });
 
